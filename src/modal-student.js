@@ -1,3 +1,4 @@
+//  ------------------------скрипт №1----------------------------
 const refs = {
     openModalBtn:document.querySelector('[data-action="open-modal"]'),
     closeModalBtn:document.querySelector('[data-action="close-modal"]'),
@@ -28,3 +29,20 @@ function onEscKeyPress(event){
         onCloseModal(); 
     }
 }
+
+
+//  -----------------------скрипт №3-------------------
+//   (() => {
+//     const refs = {
+//       openModalBtn: document.querySelector("[data-modal-open]"),
+//       closeModalBtn: document.querySelector("[data-modal-close]"),
+//       modal: document.querySelector("[data-modal]"),
+//     };
+  
+//     refs.openModalBtn.addEventListener("click", toggleModal);
+//     refs.closeModalBtn.addEventListener("click", toggleModal);
+  
+//     function toggleModal() {
+//       refs.modal.classList.toggle("is-hidden");
+//     }
+//   })();
