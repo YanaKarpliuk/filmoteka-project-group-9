@@ -7,7 +7,7 @@ body.show-modal .backdrop{
 body.show-modal .modal{
   transform:scale(1);
 }
-.beckdrop {
+.backdrop {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,6 +22,7 @@ body.show-modal .modal{
     visibility: hidden;
     background-color: rgba(0, 0, 0, 0.8);
 }
+
 .modal {
     background-color: #ffffff;
     position: absolute;
