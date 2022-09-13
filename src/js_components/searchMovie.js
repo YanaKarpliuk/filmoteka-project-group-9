@@ -39,7 +39,9 @@ export function onSearchMovie(e) {
     removeLoadMoreBtn(loadMore);
     addLoadMoreBtn();
     const loadMoreBtn = document.querySelector('.load-more-button');
-    loadMoreBtn.addEventListener('click', loadMoreMovies);
+    loadMoreBtn.addEventListener('click', () => {
+      renderLoadMoreMovies(querySearch, pageQuery);
+    });
   }
 }
 
@@ -60,7 +62,7 @@ function renderSearchMovies(query) {
         );
         if (totalPages === pageQuery) {
           warningEndCollection();
-          removeLoadMoreBtn(loadMoreMovies);
+          removeLoadMoreBtn(renderLoadMoreMovies);
         }
         pageQuery += 1;
       }
@@ -69,7 +71,7 @@ function renderSearchMovies(query) {
 }
 
 // Function that render markup when more movies need to be loaded
-function renderLoadMoreMovies(query, page) {
+export function renderLoadMoreMovies(query, page) {
   fetchMovies(query, page)
     .then(({ data }) => {
       const movies = data.results;
@@ -79,16 +81,11 @@ function renderLoadMoreMovies(query, page) {
       );
       if (totalPages === pageQuery) {
         warningEndCollection();
-        removeLoadMoreBtn(loadMoreMovies);
+        removeLoadMoreBtn(renderLoadMoreMovies);
       }
       pageQuery += 1;
     })
     .catch(error => console.log(error));
-}
-
-// Function that is executed when the loadMoreBtn is clicked
-export function loadMoreMovies() {
-  renderLoadMoreMovies(querySearch, pageQuery);
 }
 
 // Function that warns that we have reached the end of the collection

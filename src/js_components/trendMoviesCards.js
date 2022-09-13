@@ -3,7 +3,7 @@ import Notiflix from 'notiflix';
 import 'notiflix/dist/notiflix-3.2.5.min.css';
 import { createElementFromHTML, getGenres } from './helpers';
 import { addLoadMoreBtn, removeLoadMoreBtn } from './load-more-button';
-import { loadMoreMovies } from './searchMovie'
+import { renderLoadMoreMovies } from './searchMovie';
 
 let currentPage = 1;
 let totalPages = null;
@@ -25,7 +25,9 @@ export async function renderTrendMovies(page) {
     totalPages = await response.total_pages;
 
     const elements = getMovieElements(movies);
-    elements.forEach(element => gallery.insertAdjacentElement('beforeend', element));
+    elements.forEach(element =>
+      gallery.insertAdjacentElement('beforeend', element)
+    );
 
     if (totalPages === page) {
       return Notiflix.Notify.failure(`This is the last page`, {
@@ -41,7 +43,7 @@ export async function renderTrendMovies(page) {
   }
 }
 
-removeLoadMoreBtn(loadMoreMovies);
+removeLoadMoreBtn(renderLoadMoreMovies);
 addLoadMoreBtn();
 const loadMoreBtn = document.querySelector('.load-more-button');
 
@@ -57,21 +59,20 @@ export function loadMore() {
 loadMoreBtn.addEventListener('click', loadMore);
 
 export function getMovieElements(movies) {
-  return movies
-    .map((movie) => {
-      const { original_title, release_date, id, poster_path, genre_ids } = movie
-      let movieGenres = getGenres(genre_ids, true);
-      const movieRelease = new Date(release_date).getFullYear();
+  return movies.map(movie => {
+    const { original_title, release_date, id, poster_path, genre_ids } = movie;
+    let movieGenres = getGenres(genre_ids, true);
+    const movieRelease = new Date(release_date).getFullYear();
 
-      const image = poster_path
-        ? `<div class="gallery-item__image-wrap">
+    const image = poster_path
+      ? `<div class="gallery-item__image-wrap">
               <picture>
                 <source srcset="https://www.themoviedb.org/t/p/w780${poster_path} 1x, https://www.themoviedb.org/t/p/w780${poster_path} 2x" media="(min-width: 768px)" type="image/jpeg">
                 <source srcset="https://www.themoviedb.org/t/p/w300${poster_path} 1x, https://www.themoviedb.org/t/p/w780${poster_path} 2x" media="(min-width: 320px)" type="image/jpeg">                           
                 <img class="gallery-item__image" src="https://www.themoviedb.org/t/p/w300${poster_path}" loading="lazy" alt="${original_title}" data-id="${id}"/>/>
               </picture>
             </div>`
-        : `<div class="gallery-item__placeholder" data-id="${id}">
+      : `<div class="gallery-item__placeholder" data-id="${id}">
                 <svg class="gallery-item__placeholder-image" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                     <title>image</title>
                     <g id="icomoon-ignore">
@@ -82,7 +83,7 @@ export function getMovieElements(movies) {
                 </svg>     
            </div>`;
 
-      const element = createElementFromHTML(`
+    const element = createElementFromHTML(`
         <li class='gallery-item'>
             ${image}
             <p class="gallery-item__title">${`${original_title.toUpperCase()}`}</p>
@@ -90,8 +91,8 @@ export function getMovieElements(movies) {
         </li>
       `);
 
-      element.dataset.movie = JSON.stringify(movie);
+    element.dataset.movie = JSON.stringify(movie);
 
-      return element;
-    });
+    return element;
+  });
 }
