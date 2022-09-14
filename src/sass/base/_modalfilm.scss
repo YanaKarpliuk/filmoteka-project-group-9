@@ -4,24 +4,23 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.25);
-  overflow: scroll;
+  // overflow: scroll;
 }
 .modalfilm {
+  background-color: #ffffff;
   position: absolute;
+  bottom: 50%;
+  right: 50%;
+  border-radius: 4px;
+  padding: 15px;
+  padding-top: 24px;
+  padding-bottom: 30px;
+  overflow: auto;
+  min-width: 100px;
+  height: 100vh;
+  z-index: 22;
 
-  top: 20px;
-  // bottom: 38px;
-  left: 50%;
-  transform: translate(-50%);
-  width: 95vw;
-  // min-height: 940px;
-  background: #ffffff;
-  // background-color: rgba(255, 255, 255, 1);
-  border-radius: 5px;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  padding-left: 20px;
-  padding-right: 20px;
+  transform: translate(50%, 50%);
 
   .movie-title {
     font-family: 'Roboto';
@@ -46,8 +45,20 @@
 
   @media screen and (min-width: 320px) {
     width: 280px;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    position: absolute;
+
+    // top: 20px;
+    // bottom: 38px;
+
+    // min-height: 940px;
+    background: #ffffff;
+    // background-color: rgba(255, 255, 255, 1);
+    // border-radius: 5px;
+    // padding-top: 40px;
+    // padding-bottom: 40px;
+    // padding-left: 20px;
+    // padding-right: 20px;
+
     .modalfoto-img {
       // min-width: 240px;
       // height: 100%;
@@ -65,9 +76,8 @@
   }
 
   @media screen and (min-width: 768px) {
-    top: 50%;
-    transform: translate(-50%, -50%);
     width: 704px;
+    height: auto;
     padding-left: 32px;
     padding-right: 32px;
     .modalfilm {
@@ -102,9 +112,8 @@
     }
   }
   @media screen and (min-width: 1280px) {
-    top: 50%;
-    transform: translate(-50%, -50%);
     width: 806px;
+    height: 558px;
 
     padding: 40px 12px;
 
